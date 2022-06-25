@@ -1,5 +1,7 @@
 import { createContext, useReducer } from 'react';
 
+import { createAction } from '../utils/reducer/reducer.utils';
+
 export const CART_ACTION_TYPES = {
   TOGGLE_IS_CART_OPEN: 'TOGGLE_IS_CART_OPEN',
   SET_CART_ITEMS: 'SET_CART_ITEMS',
@@ -82,7 +84,7 @@ export const CartProvider = ({ children }) => {
   const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
   
   const toggleIsCartOpen = () => {
-    dispatch({ type: CART_ACTION_TYPES.TOGGLE_IS_CART_OPEN });
+    dispatch(createAction(CART_ACTION_TYPES.TOGGLE_IS_CART_OPEN));
   }
   
   const updateCartItems = (cartItems) => {
@@ -93,7 +95,7 @@ export const CartProvider = ({ children }) => {
       cartCount,
       cartTotal
     }
-    dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload });
+    dispatch(createAction(CART_ACTION_TYPES.SET_CART_ITEMS, payload));
   }
 
   const addItemToCart = productToAdd => updateCartItems(addCartItem(cartItems, productToAdd));
