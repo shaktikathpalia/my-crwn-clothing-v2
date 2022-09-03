@@ -21,12 +21,12 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
-  authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
-  projectId: 'crwn-clothing-db-98d4d',
-  storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
-  messagingSenderId: '626766232035',
-  appId: '1:626766232035:web:506621582dab103a4d08d6',
+  apiKey: "AIzaSyBz13tUTGpN-oC7ag2taVahQ36zCi23P78",
+  authDomain: "crown-clothing-db-f3377.firebaseapp.com",
+  projectId: "crown-clothing-db-f3377",
+  storageBucket: "crown-clothing-db-f3377.appspot.com",
+  messagingSenderId: "225070087807",
+  appId: "1:225070087807:web:d5ea21edf551e9674f094a"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -67,13 +67,8 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  console.log(querySnapshot.docs[0].data());
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 export const createUserDocumentFromAuth = async (
